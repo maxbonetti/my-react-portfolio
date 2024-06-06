@@ -18,14 +18,31 @@ const Contact = () => {
         });
     };
 
-    const handleSubmit = (e) => {
+    const validateForm = () => {
+        const newErrors = {};
+        if (!form.name) newErrors.name = 'Name is required';
+        if (!form.email) {
+          newErrors.email = 'Email is required';
+        } else {
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!emailRegex.test(form.email)) newErrors.email = 'Invalid email address';
+        }
+        if (!form.message) newErrors.message = 'Message is required';
+        return newErrors;
+      };
+    
+      const handleSubmit = (e) => {
         e.preventDefault();
-           // Add form validation and submission logic here
-           //
-           //
-           //
-           //
-    };
+        const newErrors = validateForm();
+        if (Object.keys(newErrors).length > 0) {
+          setErrors(newErrors);
+        } else {
+          alert('Form submitted successfully!');
+          setForm({ name: '', email: '', message: '' });
+          setErrors({});
+        }
+      };
+
     return (
         <section>
             <h2>Contact</h2>

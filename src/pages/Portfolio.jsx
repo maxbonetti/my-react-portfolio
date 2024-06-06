@@ -14,4 +14,4 @@ const Portfoloio = () => (
     </section>
 );
 
-export defeault Portfoloio;
+export default Portfoloio;
